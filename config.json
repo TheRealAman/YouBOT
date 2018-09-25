@@ -1,5 +1,5 @@
 {
   "keywords": ["aman", "amanbot", "bot", "faggot", "<@482396306166382613>"],
   "cooldown": 4000,
-  "cooldownMessage": "hey fuck off for %seconds% seconds thanks"
+  "cooldownMessage": "%seconds% left"
 }
