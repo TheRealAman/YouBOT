@@ -1,3 +1,16 @@
+//bot is alive
+const http = require('http');
+const express = require('express');
+const app = express();
+app.get("/", (request, response) => {
+  console.log(Date.now() + " ping received.");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://aman-bot-bot.glitch.me/`);
+}, 280000);
+//the actual bot
 const { Client } = require("discord.js");
 const client = new Client();
 
@@ -6,10 +19,7 @@ var quotes = require('./quotes.json')
 
 var cooldowns = {};
 
-if (!config.token) {
-    console.log('Token not set.');
-    process.exit();
-} else if (!config.keywords) {
+if (!config.keywords) {
     console.log('Keywords not set.');
     process.exit();
 }
@@ -43,7 +53,8 @@ client.on('message', msg => {
 });
 
 client.on('ready', () => {
-    console.log(`Bot is in ${client.guilds.array().length} guilds`);
+  console.log(`Bot is in ${client.guilds.array().length} guilds`);
+  client.user.setActivity('my name', { type: 'WATCHING' });
 });
 
 client.on('guildCreate', (guild) => {
@@ -57,7 +68,7 @@ function addCooldown(author) {
     cooldowns[author] = date;
 }
 
-client.login(config.token);
+client.login(process.env.TOKEN);
 
 function getRandomQuote() {
     return quotes[rand(quotes.length)];    
